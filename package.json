@@ -1,0 +1,14 @@
+{
+  "name": "release-server",
+  "version": "1.0.0",
+  "description": "git",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "surmon",
+  "license": "ISC",
+  "dependencies": {
+    "exec": "^0.2.1"
+  }
+}
