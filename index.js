@@ -2,7 +2,7 @@ const http = require('http')
 const exec = require('exec')
 
 const port = 9988
-const projects = ['vue-blog', 'angular-admin', 'NodePress']
+const projects = ['vue-blog', 'angular-admin', 'nodepress']
 
 const deployServer = http.createServer((request, response) => {
   const url = request.url
