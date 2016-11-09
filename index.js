@@ -1,21 +1,19 @@
 const http = require('http')
 const exec = require('exec')
 
-const PORT = 9988
-const PATH = {
-  vue: '../vue-blog',
-  admin: '../angular-admin',
-  nodepress: 'NodePress'
-}
+const port = 9988
+const projects = ['vue-blog', 'angular-admin', 'NodePress']
 
 const deployServer = http.createServer((request, response) => {
-  if (request.url.search(/deploy\/?$/i) > 0) {
+  const url = request.url
+  const project = url.split('/deploy/')[1]
+  // console.log(url)
+  // console.log(project)
+  if (url.includes('/deploy') && projects.includes(project)) {
 
-    let dir = PATH.vue
-    const commands = [`cd ${dir}`, '', 'git pull'].join(' && ')
-
+    const commands = [`cd ../${project}`, 'git pull'].join(' && ')
     console.log(commands)
-    console.log(request)
+    // console.log(request.url)
 
     exec(commands,(err, out, code) => {
       if (err instanceof Error) {
@@ -27,6 +25,7 @@ const deployServer = http.createServer((request, response) => {
       process.stdout.write(out)
       response.writeHead(200)
       response.end('Deploy Done.')
+      console.log(new Date(), '执行成功！')
     })
 
   } else {
@@ -35,4 +34,4 @@ const deployServer = http.createServer((request, response) => {
   }
 })
 
-deployServer.listen(PORT)
+deployServer.listen(port)
