@@ -1,5 +1,5 @@
 {
-  "name": "release-server",
+  "name": "deploy",
   "version": "1.0.0",
   "description": "git",
   "main": "index.js",
@@ -9,6 +9,6 @@
   "author": "surmon",
   "license": "ISC",
   "dependencies": {
-    "exec": "^0.2.1"
+    "github-webhook-handler": "^0.6.0"
   }
 }
