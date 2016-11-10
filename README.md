@@ -2,5 +2,5 @@
 用于linux项目下自动热部署
 
 ```bash
-forever -p . -l ./logs/server.log -e ./logs/error.log -o ./logs/out.log -a -w start index.js
+pm2 start index.js --name deploy --watch -i max -e ./logs/deploy/error.log -o ./logs/deploy/out.log
 ```
