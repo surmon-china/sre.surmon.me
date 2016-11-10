@@ -7,8 +7,8 @@ WEB_USERGROUP='root'
 echo "Start deployment"
 cd $WEB_PATH
 echo "pulling source code..."
-git reset --hard origin/release
-git clean -f
+# git reset --hard origin/release
+# git clean -f
 git pull
 git checkout release
 echo "changing permissions..."
