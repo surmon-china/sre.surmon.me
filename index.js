@@ -28,7 +28,7 @@ http.createServer((req, res) => {
 	})
 }).listen(port, () => {
   console.log(`Deploy server Run！port at ${port}`)
-  shell.exec('echo shell test OK!', function(code, stdout, stderr) {
+  shell.exec('echo shell test OK!', (code, stdout, stderr) => {
 	  // console.log('Exit code:', code)
 	  // console.log('Program output:', stdout)
 	  // console.log('Program stderr:', stderr, stderr === '', !!stderr)
