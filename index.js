@@ -1,37 +1,48 @@
 const http = require('http')
-const exec = require('exec')
+const createHandler = require('github-webhook-handler')
+const handler = createHandler({ path: '/webhook', secret: 'surmon' })
+// 上面的 secret 保持和 GitHub 后台设置的一致
 
-const port = 9988
-const projects = ['vue-blog', 'angular-admin', 'nodepress']
+const commands = (cmd, args, callback) => {
+	const spawn = require('child_process').spawn
+	const child = spawn(cmd, args)
+	let resp = ''
+	child.stdout.on('data', buffer => {
+		resp += buffer.toString()
+	})
+	child.stdout.on('end', () => {
+		callback(resp)
+	})
+}
 
-const deployServer = http.createServer((request, response) => {
-  const url = request.url
-  const project = url.split('/deploy/')[1]
-  // console.log(url)
-  // console.log(project)
-  if (url.includes('/deploy') && projects.includes(project)) {
+http.createServer((req, res) => {
+	handler(req, res, err => {
+		res.statusCode = 404
+		res.end('no such location')
+	})
+}).listen(9988)
 
-    const commands = [`cd ../${project}`, 'git pull'].join(' && ')
-    console.log(commands)
-    // console.log(request.url)
-
-    exec(commands,(err, out, code) => {
-      if (err instanceof Error) {
-        response.writeHead(500)
-        response.end('Server Internal Error.')
-        throw err
-      }
-      process.stderr.write(err)
-      process.stdout.write(out)
-      response.writeHead(200)
-      response.end('Deploy Done.')
-      console.log(new Date(), '执行成功！')
-    })
-
-  } else {
-    response.writeHead(404)
-    response.end('Not Found.')
-  }
+handler.on('error', err => {
+	console.error('Error:', err.message)
 })
 
-deployServer.listen(port)
+handler.on('push', event => {
+	console.log('Received a push event for %s to %s', event.payload.repository.name, event.payload.ref)
+		// commands('sh', ['./deploy-dev.sh'], text => { console.log(text) })
+})
+
+handler.on('commit_comment', event => {
+	console.log(event)
+	console.log('Received a push event for %s to %s', event.payload.repository.name, event.payload.ref)
+		// commands('sh', ['./deploy-dev.sh'], text => { console.log(text) })
+})
+
+/*
+handler.on('issues', event => {
+  console.log('Received an issue event for % action=%s: #%d %s',
+    event.payload.repository.name,
+    event.payload.action,
+    event.payload.issue.number,
+    event.payload.issue.title)
+})
+*/
