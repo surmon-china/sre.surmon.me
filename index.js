@@ -27,7 +27,7 @@ http.createServer((req, res) => {
 		res.end('no such location')
 	})
 }).listen(port, () => {
-  console.log(`Deploy server Run！port at ${port}`)
+  console.log(new Date(), `Deploy server Run！port at ${port}`)
   shell.exec('echo shell test OK!', (code, stdout, stderr) => {
 	  // console.log('Exit code:', code)
 	  // console.log('Program output:', stdout)
