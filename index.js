@@ -1,5 +1,5 @@
 const http = require('http')
-const exec = require('exec')
+const shell = require('shelljs')
 const createHandler = require('github-webhook-handler')
 const handler = createHandler({ path: '/webhook', secret: 'surmon' })
 // 上面的 secret 保持和 GitHub 后台设置的一致
@@ -7,31 +7,17 @@ const handler = createHandler({ path: '/webhook', secret: 'surmon' })
 const port = 9988
 const projects = ['vue-blog', 'angular-admin', 'nodepress']
 
-/*
-const commands = (cmd, args, callback) => {
-	const spawn = require('child_process').spawn
-	const child = spawn(cmd, args)
-	let resp = ''
-	child.stdout.on('data', buffer => { resp += buffer.toString() })
-	child.stdout.on('end', () => { callback(resp) })
-}
-*/
-
 const projectHandler = (event, action) => {
 	const project = event.payload.repository.name
 	const branch = event.payload.ref
 	if (projects.includes(project)) {
 		console.log(`Received a ${action} event for ${project} to ${branch}`)
-		// commands('sh', [`./projects/${project}.sh`], text => { console.log(text) })
-		exec(`sh ./projects/${project}.sh`,(err, out, code) => {
-		      if (err instanceof Error) {
-			// throw err
-			return console.log('执行失败！', new Date())
-		      }
-		      process.stderr.write(err)
-		      process.stdout.write(out)
-		      console.log('执行成功！', new Date())
+		shell.exec(`sh ./projects/${project}.sh`, (code, stdout, stderr) => {
+		  // console.log('Exit code:', code)
+		  // console.log('Program output:', stdout)
+		  console.log(new Date(), '执行完毕！', !!stderr ? '有错误：' : '无错误！', stderr)
 		})
+
 	}
 }
 
@@ -42,6 +28,12 @@ http.createServer((req, res) => {
 	})
 }).listen(port, () => {
   console.log(`Deploy server Run！port at ${port}`)
+  shell.exec('echo shell test OK!', function(code, stdout, stderr) {
+	  // console.log('Exit code:', code)
+	  // console.log('Program output:', stdout)
+	  // console.log('Program stderr:', stderr, stderr === '', !!stderr)
+
+  })
 })
 
 handler.on('error', err => {
