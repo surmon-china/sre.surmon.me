@@ -11,7 +11,7 @@ const projectHandler = (event, action) => {
 	const project = event.payload.repository.name
 	const branch = event.payload.ref
 	if (projects.includes(project)) {
-		console.log(`Received a ${action} event for ${project} to ${branch}`)
+		console.log(new Date(), `Received a ${action} event for ${project} to ${branch}`)
 		shell.exec(`sh ./projects/${project}.sh`, (code, stdout, stderr) => {
 		  // console.log('Exit code:', code)
 		  // console.log('Program output:', stdout)
