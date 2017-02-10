@@ -13,4 +13,5 @@ git pull
 git checkout release
 echo "changing permissions..."
 chown -R $WEB_USER:$WEB_USERGROUP $WEB_PATH
+npm run build && pm2 startOrReload ecosystem.config.js
 echo "Finished."
