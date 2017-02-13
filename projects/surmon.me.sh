@@ -13,5 +13,6 @@ git pull
 git checkout release
 echo "changing permissions..."
 chown -R $WEB_USER:$WEB_USERGROUP $WEB_PATH
+pm2 stop surmon.me
 npm run build && pm2 startOrReload ecosystem.config.js
 echo "Finished."
