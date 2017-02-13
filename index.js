@@ -13,9 +13,9 @@ const projectHandler = (event, action) => {
 	if (projects.includes(project)) {
 		console.log(new Date(), `Received a ${action} event for ${project} to ${branch}`)
 		shell.exec(`sh ./projects/${project}.sh`, (code, stdout, stderr) => {
-		  // console.log('Exit code:', code)
-		  // console.log('Program output:', stdout)
-		  console.log(new Date(), '执行完毕！', !!stderr ? '有错误：' : '无错误！', stderr)
+		  console.log(new Date(), 'Exit code:', code)
+		  console.log(new Date(), 'Program output:', stdout)
+		  console.log(new Date(), '执行完毕！错误信息：？', stderr)
 		})
 
 	}
