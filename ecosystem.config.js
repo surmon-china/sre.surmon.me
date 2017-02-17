@@ -3,6 +3,7 @@ module.exports = {
     {
       name: "deploy",
       watch: true,
+      max_memory_restart: "40M",
       script: "index.js",
       error_file: "/usr/local/wwwlogs/deploy/error.log",
       out_file: "/usr/local/wwwlogs/deploy/out.log"
