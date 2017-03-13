@@ -13,6 +13,6 @@ git pull
 git checkout master
 echo "changing permissions..."
 chown -R $WEB_USER:$WEB_USERGROUP $WEB_PATH
-pm2 delete surmon.me
-npm run build && pm2 start ecosystem.config.js
+sudo pm2 stop surmon.me
+npm run build && sudo pm2 restart surmon.me
 echo "Finished."
