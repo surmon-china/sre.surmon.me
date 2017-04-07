@@ -14,5 +14,7 @@ git checkout master
 echo "changing permissions..."
 chown -R $WEB_USER:$WEB_USERGROUP $WEB_PATH
 sudo pm2 stop surmon.me
+pm2 stop nodepress
 npm run build && sudo pm2 restart surmon.me
+pm2 restart nodepress
 echo "Finished."
