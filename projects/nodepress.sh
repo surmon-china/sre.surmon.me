@@ -13,4 +13,5 @@ git pull
 git checkout master
 echo "changing permissions..."
 chown -R $WEB_USER:$WEB_USERGROUP $WEB_PATH
+pm2 restart nodepress
 echo "Finished."
