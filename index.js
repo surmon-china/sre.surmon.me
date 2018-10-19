@@ -10,7 +10,7 @@ const projects = ['surmon.me', 'angular-admin', 'nodepress', 'deploy']
 const projectHandler = (event, action) => {
 	const branch = event.payload.ref
 	const project = event.payload.repository.name
-	const message = event.payload.commits.message || ''
+	const message = event.payload.head_commit.message || ''
 	if (projects.includes(project) && message.includes('doDeploy')) {
 		console.log(new Date(), `收到一个关于项目 ${project} - ${branch} 分支的 ${action} 事件，要求服务端部署！`)
 		shell.exec(`sh ./projects/${project}.sh`, (code, stdout, stderr) => {
