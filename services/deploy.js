@@ -4,6 +4,7 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
+const shell = require('shelljs')
 const consola = require('consola')
 const projects = ['surmon.me', 'angular-admin', 'nodepress', 'deploy']
 
