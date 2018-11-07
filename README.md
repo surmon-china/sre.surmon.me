@@ -1,4 +1,4 @@
-# deploy
+# sre.surmon.me
 
 用于 Surmon.me 的运维服务
 
