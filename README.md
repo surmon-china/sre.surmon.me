@@ -1,5 +1,6 @@
 # deploy
-用于linux项目下自动热部署
+
+用于 Surmon.me 的运维服务
 
 [![GitHub stars](https://img.shields.io/github/stars/surmon-china/deploy.svg?style=flat-square)](https://github.com/surmon-china/deploy/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/surmon-china/deploy.svg?style=flat-square)](https://github.com/surmon-china/deploy/issues)

@@ -1,6 +1,6 @@
 {
-  "name": "deploy",
-  "version": "1.0.0",
+  "name": "sre.surmon.me",
+  "version": "2.0.0",
   "description": "git",
   "main": "index.js",
   "scripts": {
@@ -9,12 +9,16 @@
   "author": {
     "name": "Surmon",
     "email": "surmon@foxmail.com",
-    "url": "http://surmon.me"
+    "url": "https://surmon.me"
   },
   "private": false,
   "license": "ISC",
   "dependencies": {
+    "consola": "^2.2.2",
     "github-webhook-handler": "^0.6.0",
-    "shelljs": "^0.7.5"
+    "node-schedule": "^1.3.0",
+    "qn": "^1.3.0",
+    "shelljs": "^0.7.5",
+    "yargs": "^12.0.2"
   }
 }

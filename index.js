@@ -1,43 +1,39 @@
+/**
+ * @file 运维服务
+ * @module sre.surmon.me
+ * @author Surmon <https://github.com/surmon-china>
+ */
+
+const fs = require('fs')
 const http = require('http')
+const { argv } = require('yargs')
+const consola = require('consola')
 const shell = require('shelljs')
 const createHandler = require('github-webhook-handler')
-const handler = createHandler({ path: '/webhook', secret: 'surmon' })
-// 上面的 secret 保持和 GitHub 后台设置的一致
-
+const handler = createHandler({ path: '/deploy', secret: argv.deploy_secret })
+const deployHandler = require('./services/deploy')
+const html = fs.readFileSync('index.html')
 const port = 9988
-const projects = ['surmon.me', 'angular-admin', 'nodepress', 'deploy']
 
-const projectHandler = (event, action) => {
-	const branch = event.payload.ref
-	const project = event.payload.repository.name
-	const message = event.payload.head_commit.message || ''
-	if (projects.includes(project) && message.includes('doDeploy')) {
-		console.log(new Date(), `收到一个关于项目 ${project} - ${branch} 分支的 ${action} 事件，要求服务端部署！`)
-		shell.exec(`sh ./projects/${project}.sh`, (code, stdout, stderr) => {
-		  console.log(new Date(), 'Exit code:', code)
-		  // console.log(new Date(), 'Program output:', stdout)
-		  console.log(new Date(), '执行完毕！错误信息：？', stderr)
-		})
-	}
-}
-
+// http server
 http.createServer((req, res) => {
-	handler(req, res, err => {
-		res.statusCode = 404
-		res.end('no such location')
-	})
-}).listen(port, () => {
-  console.log(new Date(), `Deploy server Run！port at ${port}`)
-  shell.exec('echo shell test OK!', (code, stdout, stderr) => {
-	  // console.log('Exit code:', code)
-	  // console.log('Program output:', stdout)
-	  // console.log('Program stderr:', stderr, stderr === '', !!stderr)
+  handler(req, res, _ => {
+    if (req.url !== '/deploy') {
+      res.writeHead(200, {
+        'Content-Type': 'text/html',
+        'Content-Length': html.length
+      })
+      res.write(html)
+    }
+    res.end()
   })
+}).listen(port, () => {
+  consola.ready(`Deploy server Run！port at ${port}`, new Date())
+  shell.exec('echo shell test OK!')
 })
 
+handler.on('push', event => { deployHandler(event, 'push') })
+handler.on('commit_comment', event => { deployHandler(event, 'commit') })
 handler.on('error', err => {
-	console.error('Error:', err.message)
+  consola.warn('Sre handler error:', err.message, new Date())
 })
-
-handler.on('push', event => { projectHandler(event, 'push') })
-handler.on('commit_comment', event => { projectHandler(event, 'commit') })
