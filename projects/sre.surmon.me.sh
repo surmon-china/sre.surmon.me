@@ -1,6 +1,6 @@
 #!/bin/bash
  
-WEB_PATH='/usr/local/wwwroot/deploy'
+WEB_PATH='/usr/local/wwwroot/sre.surmon.me'
 WEB_USER='root'
 WEB_USERGROUP='root'
  

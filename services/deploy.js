@@ -6,7 +6,7 @@
 
 const shell = require('shelljs')
 const consola = require('consola')
-const projects = ['surmon.me', 'angular-admin', 'nodepress', 'deploy']
+const projects = ['surmon.me', 'angular-admin', 'nodepress', 'sre.surmon.me']
 
 module.exports = (event, action) => {
   const branch = event.payload.ref
