@@ -11,3 +11,4 @@ logs/
 ecosystem.config.js
 package-lock.json
 databacks/*
+test/*
