@@ -15,7 +15,11 @@ const shell = require('shelljs')
 const createHandler = require('github-webhook-handler')
 const handler = createHandler({ path: DEPLOY_ROUTE, secret: argv.deploy_secret })
 const deployHandler = require('./services/deploy')
+const scheduleBackup = require('./services/dbbackup')
 const html = fs.readFileSync('index.html')
+
+// schedule backup
+scheduleBackup()
 
 // http server
 http.createServer((req, res) => {
