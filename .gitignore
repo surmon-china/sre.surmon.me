@@ -8,5 +8,5 @@ test/unit/coverage
 test/e2e/reports
 *.log
 logs/
-# ecosystem.config.js
+ecosystem.config.js
 package-lock.json
