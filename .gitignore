@@ -10,3 +10,4 @@ test/e2e/reports
 logs/
 ecosystem.config.js
 package-lock.json
+databacks/*
