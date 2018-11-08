@@ -13,14 +13,14 @@ const consola = require('consola')
 const schedule = require('node-schedule')
 
 const FILE_EXT = '.tar.gz'
-const BACK_CMD_SHELL = path.join(__dirname, '..', '..', 'wwwcmd') + '/dbbackup.sh'
-const BACK_DATA_PACK = path.join(__dirname, '..', '..', 'wwwbak') + '/nodepress' + FILE_EXT
+const BACK_CMD_SHELL = path.join(__dirname, '..', '..', '..', 'wwwcmd') + '/dbbackup.sh'
+const BACK_DATA_PACK = path.join(__dirname, '..', '..', '..', 'wwwbak') + '/nodepress' + FILE_EXT
 
 // const BACK_CMD_SHELL = path.join(__dirname, '..', 'test') + '/test.sh'
 // const BACK_DATA_PACK = path.join(__dirname, '..', 'test') + '/test' + FILE_EXT
 
 const UPFAILE_TIMEOUT = 1000 * 60 * 5
-const UPLOAD_INTERVAL = '10 32 17 * * *'
+const UPLOAD_INTERVAL = '0 35 17 * * *'
 // const UPLOAD_INTERVAL = '10 0 0 * * *'
 
 // Qiniu Access Key 和 Secret Key
