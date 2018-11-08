@@ -20,8 +20,7 @@ const BACK_DATA_PACK = path.join(__dirname, '..', '..', '..', 'wwwbak') + '/node
 // const BACK_DATA_PACK = path.join(__dirname, '..', 'test') + '/test' + FILE_EXT
 
 const UPFAILE_TIMEOUT = 1000 * 60 * 5
-const UPLOAD_INTERVAL = '0 35 17 * * *'
-// const UPLOAD_INTERVAL = '10 0 0 * * *'
+const UPLOAD_INTERVAL = '0 0 3 * * *'
 
 // Qiniu Access Key 和 Secret Key
 const accessKey = argv.dbbackup_qiniu_accessKey
@@ -62,8 +61,6 @@ const uploadFile = (fileName, localFilePath) => {
   })
 }
 
-consola.ready('Qiniu sdk ok!')
-
 // 打包备份任务
 const backupAndPack = () => {
   shell.exec(`sh ${BACK_CMD_SHELL}`, (code, stdout, stderr) => {
@@ -81,5 +78,7 @@ const scheduleBackup = () => {
   consola.start('开始执行定时备份任务！')
   schedule.scheduleJob(UPLOAD_INTERVAL, backupAndPack)
 }
+
+consola.ready('Qiniu sdk ok!')
 
 module.exports = scheduleBackup

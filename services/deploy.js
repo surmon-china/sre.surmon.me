@@ -16,8 +16,8 @@ module.exports = (event, action) => {
     consola.info(`收到一个关于项目 ${project} - ${branch} 分支的 ${action} 事件，要求服务端部署！`, new Date())
     shell.exec(`sh ./projects/${project}.sh`, (code, stdout, stderr) => {
       consola.info('Exit code:', code, new Date())
-      // consola.log(new Date(), 'Program output:', stdout)
-      consola.info('执行完毕！错误信息：？', new Date(), stderr)
+      consola.info('执行完毕！Program output:', stdout)
+      // consola.info('执行完毕！错误信息：？', new Date(), stderr)
     })
   }
 }
