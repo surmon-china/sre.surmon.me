@@ -20,7 +20,7 @@ const BACK_DATA_PACK = path.join(__dirname, '..', '..', 'wwwbak') + '/nodepress'
 // const BACK_DATA_PACK = path.join(__dirname, '..', 'test') + '/test' + FILE_EXT
 
 const UPFAILE_TIMEOUT = 1000 * 60 * 5
-const UPLOAD_INTERVAL = '10 28 17 * * *'
+const UPLOAD_INTERVAL = '10 32 17 * * *'
 // const UPLOAD_INTERVAL = '10 0 0 * * *'
 
 // Qiniu Access Key 和 Secret Key
