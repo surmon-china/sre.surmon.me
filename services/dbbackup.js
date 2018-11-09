@@ -66,7 +66,7 @@ const backupAndPack = () => {
   shell.exec(`sh ${BACK_CMD_SHELL}`, (code, stdout, stderr) => {
     consola.info('dbbackup.sh 执行完成！', code, stdout, stderr)
     const fileDate = moment(new Date()).format('YYYY-MM-DD-HH:mm')
-    const fileName = `/nodepress/backup-${fileDate}${FILE_EXT}`
+    const fileName = `nodepress/backup-${fileDate}${FILE_EXT}`
     consola.info('上传文件: ' + fileName)
     consola.info('文件源位置: ' + BACK_DATA_PACK)
     uploadFile(fileName, BACK_DATA_PACK)
