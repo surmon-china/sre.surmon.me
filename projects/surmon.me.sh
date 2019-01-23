@@ -19,6 +19,6 @@ pm2 stop nodepress
 sync && echo 3 | sudo tee /proc/sys/vm/drop_caches
 npm run build
 sync && echo 3 | sudo tee /proc/sys/vm/drop_caches
-sudo pm2 restart surmon.me
 pm2 restart nodepress
+sudo pm2 restart surmon.me
 echo "Finished."
