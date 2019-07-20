@@ -1,4 +1,7 @@
 
+## TODO
+- 增加类似 docker 的 `npm i` 等全链路构建策略
+
 ## CHANGELOG
 
 ### v2.0.2
