@@ -9,7 +9,7 @@ cd $WEB_PATH
 echo "pulling source code..."
 # git reset --hard origin/master
 # git clean -f
-git pull
+git pull -f
 git checkout master
 echo "changing permissions..."
 chown -R $WEB_USER:$WEB_USERGROUP $WEB_PATH
