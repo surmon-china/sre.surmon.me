@@ -6,7 +6,8 @@
 
 ### v2.0.2
 - 更新依赖
-- 将 deploy 中的 `git pull` 替换为 `git pull -f`
+- ~~将 deploy 中的 `git pull` 替换为 `git pull -f`~~
+- 更新 deploy 中的 git 操作相关命令
 
 ### v2.0.0
 - 重新设计为服务模式
