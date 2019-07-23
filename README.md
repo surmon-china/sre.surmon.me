@@ -11,5 +11,5 @@
 **[CHANGELOG.md](https://github.com/surmon-china/sre.surmon.me/blob/master/CHANGELOG.md#changelog)**
 
 ```bash
-pm2 start ecosystem.config.js
+pm2 start ecosystem.config.example.js
 ```
